@@ -1,8 +1,17 @@
 # Webfleet Solutions
 
-This fork of the Thin Backup Plugin for Jenkins includes fixes for some flaws. We build the fixed plugin and use it in our central CI Jenkins instance.
+This fork of the [Thin Backup Plugin for Jenkins](https://github.com/jenkinsci/thin-backup-plugin) includes fixes for some flaws. We build the fixed plugin and use it in our central CI Jenkins instance.
 
-The master branch here includes our latest fixes and also the version that we run in our instance.
+## Branch structure
+
+The **master** branch will be in sync with the original repository
+
+While the **develop** branch represents our state of the repository: It includes
+* our fixes
+* our environment specific files / changes
+The state of branch **develop** will be run in our CI Jenkins instance.
+
+Fixes and changes will be done in separate *feature/...* and *bugfix/...* branches. From there we'll set up pull requests for the original repository and merge into **develop**.
 
 # Thin Backup Plugin
 
