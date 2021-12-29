@@ -1,3 +1,9 @@
+# Webfleet Solutions
+
+This fork of the Thin Backup Plugin for Jenkins includes fixes for some flaws. We build the fixed plugin and use it in our central CI Jenkins instance.
+
+The master branch here includes our latest fixes and also the version that we run in our instance.
+
 # Thin Backup Plugin
 
 This plugin simply backs up the global and job specific configurations (not the archive or the workspace).
