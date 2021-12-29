@@ -14,13 +14,6 @@ pipeline {
         skipDefaultCheckout()
         timeout(activity: true, time: 20, unit: 'MINUTES')
         timestamps()
-/*        office365ConnectorWebhooks([[
-            name: 'Sky Notifications',
-            notifyBackToNormal: true,
-            notifyFailure: true,
-            notifyRepeatedFailure: true,
-            url: 'https://webfleet.webhook.office.com/webhookb2/809b395f-fac9-4841-89ed-04da45c71f1d@e648a634-1151-497c-9797-0f975bddecc0/IncomingWebhook/8d9c1963b77049ef94363a683d53d403/37ff97a0-7b51-4448-9516-722f9e10fdda'
-        ]]) */
     }
     stages {
         stage('Prepare workspace') {
