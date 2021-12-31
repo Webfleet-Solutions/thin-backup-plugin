@@ -10,6 +10,7 @@
 	<artifactId>thinBackup</artifactId>
 	<name>ThinBackup</name>
 	<version>1.11-SNAPSHOT</version>
+        <classifier>modWFS</classifier>
 	<packaging>hpi</packaging>
 
 	<licenses>
