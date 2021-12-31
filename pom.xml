@@ -9,8 +9,7 @@
 	<groupId>org.jvnet.hudson.plugins</groupId>
 	<artifactId>thinBackup</artifactId>
 	<name>ThinBackup</name>
-	<version>1.11-SNAPSHOT</version>
-        <classifier>modWFS</classifier>
+	<version>1.11-modWFS-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 
 	<licenses>
