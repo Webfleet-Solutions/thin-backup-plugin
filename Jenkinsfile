@@ -21,8 +21,7 @@ pipeline {
                 HTTP_PROXY = 'proxy.dev.ttw:3128'
                 HTTPS_PROXY = 'proxy.dev.ttw:3128'
             }
-		}
-        steps {
+            steps {
                 plainCheckoutFromGit(scm, env, [[$class: 'CloneOption', noTags: false], [$class: 'LocalBranch']])
                 configFileProvider([configFile(fileId: '1d2a39a0-89eb-4bb3-ac3a-7cac7bb610eb', targetLocation: 'mavenSettings.xml')])
             }
