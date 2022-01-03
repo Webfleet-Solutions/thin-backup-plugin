@@ -5,7 +5,7 @@
 
 pipeline {
     agent {
-        label 'docker'
+        label 'Docker 04'
     }
     options {
         ansiColor('xterm')
