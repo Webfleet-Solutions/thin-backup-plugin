@@ -24,8 +24,10 @@ pipeline {
         }
         stage('Build package') {
             steps {
-                docker.image('nexus.ttt-sp.com:16000/maven:3-openjdk-8-slim').inside {
-                    sh 'mvn -Dmaven.repo.local=/usr/src/mavenbuild/.m2 -settings mavenSettings.xml clean package'
+				script {
+                    docker.image('nexus.ttt-sp.com:16000/maven:3-openjdk-8-slim').inside {
+                        sh 'mvn -Dmaven.repo.local=/usr/src/mavenbuild/.m2 -settings mavenSettings.xml clean package'
+                    }
                 }
             }
         }
