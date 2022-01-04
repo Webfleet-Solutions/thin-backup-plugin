@@ -18,6 +18,10 @@ pipeline {
     stages {
         stage('Prepare workspace') {
             steps {
+				echo "proxy settings:"
+				echo env.HTTP_PROXY
+				echo env.HTTPS_PROXY
+				echo "end proxy settings"
                 plainCheckoutFromGit(scm, env, [[$class: 'CloneOption', noTags: false], [$class: 'LocalBranch']])
                 configFileProvider([configFile(fileId: '1d2a39a0-89eb-4bb3-ac3a-7cac7bb610eb', targetLocation: 'mavenSettings.xml')])
             }
