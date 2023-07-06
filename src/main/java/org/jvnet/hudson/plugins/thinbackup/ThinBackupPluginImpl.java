@@ -54,6 +54,7 @@ public class ThinBackupPluginImpl extends Plugin {
   private boolean backupBuildArchive = false;
   private boolean backupPluginArchives = false;
   private boolean backupUserContents = false;
+  private boolean stopOnException = true;
 
   private boolean backupConfigHistory = false;
   private boolean backupAdditionalFiles = false;
@@ -79,7 +80,7 @@ public class ThinBackupPluginImpl extends Plugin {
   }
 
   public File getHudsonHome() {
-    Jenkins jenkins = Jenkins.getInstanceOrNull();
+    final Jenkins jenkins = Jenkins.getInstanceOrNull();
     if (jenkins == null) {
       return null;
     }
@@ -106,7 +107,7 @@ public class ThinBackupPluginImpl extends Plugin {
     return forceQuietModeTimeout;
   }
 
-  public void setForceQuietModeTimeout(int forceQuietModeTimeout) {
+  public void setForceQuietModeTimeout(final int forceQuietModeTimeout) {
     this.forceQuietModeTimeout = forceQuietModeTimeout;
   }
 
@@ -198,7 +199,7 @@ public class ThinBackupPluginImpl extends Plugin {
     return backupBuildArchive;
   }
 
-  public void setBackupBuildsToKeepOnly(boolean backupBuildsToKeepOnly) {
+  public void setBackupBuildsToKeepOnly(final boolean backupBuildsToKeepOnly) {
     this.backupBuildsToKeepOnly = backupBuildsToKeepOnly;
   }
 
@@ -219,10 +220,10 @@ public class ThinBackupPluginImpl extends Plugin {
   }
 
   public boolean isBackupUserContents() {
-    return this.backupUserContents;
+    return backupUserContents;
   }
 
-  public void setBackupUserContents(boolean backupUserContents) {
+  public void setBackupUserContents(final boolean backupUserContents) {
     this.backupUserContents = backupUserContents;
   }
 
@@ -254,22 +255,22 @@ public class ThinBackupPluginImpl extends Plugin {
     return backupAdditionalFilesRegex;
   }
 
-  public void setWaitForIdle(boolean waitForIdle) {
+  public void setWaitForIdle(final boolean waitForIdle) {
     this.waitForIdle = waitForIdle;
   }
 
   public boolean isWaitForIdle() {
-    return this.waitForIdle;
+    return waitForIdle;
   }
 
   public FormValidation doCheckForceQuietModeTimeout(final StaplerRequest res, final StaplerResponse rsp,
       @QueryParameter("value") final String timeout) {
-    FormValidation validation = FormValidation.validateIntegerInRange(timeout, -1, Integer.MAX_VALUE);
+    final FormValidation validation = FormValidation.validateIntegerInRange(timeout, -1, Integer.MAX_VALUE);
     if (!FormValidation.ok().equals(validation)) {
       return validation;
     }
 
-    int intTimeout = Integer.parseInt(timeout);
+    final int intTimeout = Integer.parseInt(timeout);
     if (intTimeout > VERY_HIGH_TIMEOUT) {
       return FormValidation.warning("You choose a very long timeout. The value need to be in minutes.");
     } else {
@@ -388,7 +389,17 @@ public class ThinBackupPluginImpl extends Plugin {
     return backupConfigHistory;
   }
 
-  public void setBackupConfigHistory(boolean backupConfigHistory) {
+  public void setBackupConfigHistory(final boolean backupConfigHistory) {
     this.backupConfigHistory = backupConfigHistory;
+  }
+  
+  public boolean isStopOnException()
+  {
+      return stopOnException;
+  }
+
+  public void setStopOnException(final boolean stopOnException)
+  {
+      this.stopOnException = stopOnException;
   }
 }

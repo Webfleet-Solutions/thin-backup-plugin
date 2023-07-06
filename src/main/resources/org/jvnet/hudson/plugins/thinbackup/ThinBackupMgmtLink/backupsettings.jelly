@@ -122,6 +122,11 @@
                         help="/plugin/thinBackup/help/help-moveOldBackupsToZipFile.html"
                         checked="${it.configuration.moveOldBackupsToZipFile}"
                         name="moveOldBackupsToZipFile" />
+                        
+                    <f:optionalBlock title="${%stop_on_exception}"
+                        help="/plugin/thinBackup/help/help-stopOnException.html"
+                        checked="${it.configuration.stopOnException}"
+                        name="stopOnException" />
                 </f:section>
                 
                 <f:section>

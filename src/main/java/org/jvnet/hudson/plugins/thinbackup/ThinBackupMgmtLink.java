@@ -25,13 +25,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import edu.umd.cs.findbugs.annotations.NonNull;
 import org.jvnet.hudson.plugins.thinbackup.restore.HudsonRestore;
 import org.jvnet.hudson.plugins.thinbackup.utils.Utils;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.model.ManagementLink;
 import hudson.model.TaskListener;
@@ -114,7 +114,7 @@ public class ThinBackupMgmtLink extends ManagementLink {
       hudsonRestore.restore();
 
       LOGGER.info("Restore finished.");
-    } catch (ParseException e) {
+    } catch (final ParseException e) {
       LOGGER.severe("Cannot parse restore option. Aborting.");
     } catch (final Exception ise) {
       LOGGER.severe("Could not restore. Aborting.");
@@ -142,8 +142,9 @@ public class ThinBackupMgmtLink extends ManagementLink {
       @QueryParameter("backupAdditionalFilesRegex") final String backupAdditionalFilesRegex,
       @QueryParameter("waitForIdle") final boolean waitForIdle,
       @QueryParameter("backupConfigHistory") final boolean backupConfigHistory,
-      @QueryParameter("forceQuietModeTimeout") final String forceQuietModeTimeout) throws IOException {
-    Jenkins jenkins = Jenkins.getInstanceOrNull();
+      @QueryParameter("forceQuietModeTimeout") final String forceQuietModeTimeout,
+      @QueryParameter("stopOnException") final boolean stopOnException) throws IOException {
+    final Jenkins jenkins = Jenkins.getInstanceOrNull();
     if (jenkins == null) {
       return;
     }
@@ -168,6 +169,7 @@ public class ThinBackupMgmtLink extends ManagementLink {
     plugin.setBackupAdditionalFilesRegex(backupAdditionalFilesRegex);
     plugin.setWaitForIdle(waitForIdle);
     plugin.setForceQuietModeTimeout(Integer.parseInt(forceQuietModeTimeout));
+    plugin.setStopOnException(stopOnException);
     plugin.save();
     LOGGER.finest("Saving backup settings done.");
     rsp.sendRedirect(res.getContextPath() + THIN_BACKUP_SUBPATH);
@@ -190,7 +192,8 @@ public class ThinBackupMgmtLink extends ManagementLink {
    * @return name of the desired category, one of the enum values of Category, e.g. {@code STATUS}.
    * @since 2.226
    */
-  @NonNull
+  @Override
+@NonNull
   public Category getCategory() {
     return Category.TOOLS;
   }
